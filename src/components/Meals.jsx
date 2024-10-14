@@ -22,8 +22,7 @@ const Meals = () => {
                         {
                             meals?.map(meal => (
                                 <div key={meal.idMeal} className="space-y-4">
-                                    <Image src={meal?.strMealThumb} alt={meal?.strMealThumb} width={500} height={500}/>
-                                    {/* <img src={meal.strMealThumb} alt="Image" /> */}
+                                    <Image src={meal?.strMealThumb} alt={meal?.strMealThumb} width={500} height={500} />
                                     <h3>Title: {meal.strMeal}</h3>
                                     <h3>Description: {meal.strInstructions}</h3>
                                 </div>

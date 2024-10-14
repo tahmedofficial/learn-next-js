@@ -1,5 +1,11 @@
 import Meals from "@/components/Meals";
 
+export const metadata = {
+    title: { absolute: "Meals" },
+    description: "Meals",
+    keywords: ["Meals", "Meals page"]
+};
+
 const page = () => {
 
     return (
