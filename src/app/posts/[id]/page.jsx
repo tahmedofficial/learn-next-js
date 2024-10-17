@@ -34,5 +34,3 @@ const page = async ({ params }) => {
         </div>
     );
 };
-
-export default page;
