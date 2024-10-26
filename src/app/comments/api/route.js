@@ -1,6 +1,10 @@
 export const GET = async () => {
     return Response.json({
         comments
+    }, {
+        headers: {
+            "Set-Cookie": "theme-dark"
+        }
     })
 }
 
