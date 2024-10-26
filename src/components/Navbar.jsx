@@ -60,7 +60,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn bg-black text-white px-10">Login</button>
+                    <Link href="/api/auth/signin">
+                        <button className="btn bg-black text-white px-10">Sign in</button>
+                    </Link>
                 </div>
             </div>
         </div>
