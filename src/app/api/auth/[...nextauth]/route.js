@@ -1,9 +1,11 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+export const authOptions = {
+    secret: process.env.NEXT_PUBLIC_Auth_secret,
     session: {
-        strategy: "jwt"
+        strategy: "jwt",
+        maxAge: 30 * 24 * 60 * 60,
     },
     providers: [
         CredentialsProvider({
@@ -30,7 +32,9 @@ const handler = NextAuth({
             }
         })
     ]
-})
+}
+
+const handler = NextAuth(authOptions)
 
 const users = [
     {

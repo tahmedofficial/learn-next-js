@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -8,6 +9,9 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 const Navbar = () => {
 
     const pathName = usePathname();
+    const session = useSession();
+    console.log(session.status);
+
 
     const navItems = [
         {
@@ -60,9 +64,15 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link href="/api/auth/signin">
-                        <button className="btn bg-black text-white px-10">Sign in</button>
-                    </Link>
+                    {
+                        session.status === "authenticated" ?
+                            <Link href="/api/auth/signin">
+                                <button className="btn bg-black text-white px-10">Sign in</button>
+                            </Link> :
+                            <Link href="/api/auth/signin">
+                                <button className="btn bg-black text-white px-10">Sign out</button>
+                            </Link>
+                    }
                 </div>
             </div>
         </div>
