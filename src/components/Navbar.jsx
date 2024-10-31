@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -11,6 +11,7 @@ const Navbar = () => {
     const pathName = usePathname();
     const session = useSession();
     console.log(session.status);
+    console.log(session);
 
 
     const navItems = [
@@ -66,13 +67,15 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {
                         session.status === "authenticated" ?
+                            <button onClick={() => signOut()} className="btn bg-black text-white px-10">Sign out</button>
+                            :
                             <Link href="/api/auth/signin">
                                 <button className="btn bg-black text-white px-10">Sign in</button>
-                            </Link> :
-                            <Link href="/api/auth/signin">
-                                <button className="btn bg-black text-white px-10">Sign out</button>
                             </Link>
                     }
+                </div>
+                <div className='mx-5 text-2xl'>
+                    <h3>{session?.data?.user?.name}</h3>
                 </div>
             </div>
         </div>

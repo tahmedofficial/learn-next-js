@@ -31,7 +31,20 @@ export const authOptions = {
                 return null;
             }
         })
-    ]
+    ],
+    callbacks: {
+        async jwt({ token, account, user }) {
+            if (account) {
+                token.type = user.type
+            }
+            return token
+        },
+
+        async session({ session, token }) {
+            session.user.type = token.type
+            return session
+        },
+    }
 }
 
 const handler = NextAuth(authOptions)
@@ -40,19 +53,22 @@ const users = [
     {
         id: 1,
         name: "Tanvir",
-        email: "t@gmail.com",
-        password: "password"
+        email: "ta@gmail.com",
+        type: "admin",
+        password: "123"
     },
     {
         id: 2,
         name: "Samiur",
         email: "s@gmail.com",
+        type: "user",
         password: "password"
     },
     {
         id: 3,
         name: "Mehedi",
         email: "m@gmail.com",
+        type: "user",
         password: "password"
     },
 ]
