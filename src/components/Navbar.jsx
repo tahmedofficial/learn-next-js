@@ -73,6 +73,9 @@ const Navbar = () => {
                                 <button className="btn bg-black text-white px-10">Sign in</button>
                             </Link>
                     }
+                    <Link href="/api/auth/signup">
+                        <button className="btn bg-black text-white px-10">Sign Up</button>
+                    </Link>
                 </div>
                 <div className='mx-5 text-2xl'>
                     <h3>{session?.data?.user?.name}</h3>
