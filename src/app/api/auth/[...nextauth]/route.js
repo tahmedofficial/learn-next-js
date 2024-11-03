@@ -1,6 +1,7 @@
 import mongoDB from "@/lib/mongoDB";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
     secret: process.env.NEXT_PUBLIC_Auth_secret,
@@ -9,6 +10,7 @@ export const authOptions = {
         maxAge: 30 * 24 * 60 * 60,
     },
     providers: [
+
         CredentialsProvider({
             credentials: {
                 email: { label: "Email", type: "text", required: true, placeholder: "Your Email" },
@@ -35,6 +37,11 @@ export const authOptions = {
                 }
                 return null;
             }
+        }),
+
+        GoogleProvider({
+            clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
         })
     ],
     callbacks: {
