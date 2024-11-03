@@ -1,3 +1,4 @@
+import mongoDB from "@/lib/mongoDB";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -21,7 +22,11 @@ export const authOptions = {
                     return null;
                 }
                 if (email) {
-                    const currentUser = users.find(user => user.email === email)
+
+                    const db = await mongoDB();
+                    const usersCollection = db.collection("user");
+                    const currentUser = await usersCollection.findOne({ email });
+
                     if (currentUser) {
                         if (currentUser.password === password) {
                             return currentUser;
@@ -48,29 +53,5 @@ export const authOptions = {
 }
 
 const handler = NextAuth(authOptions)
-
-const users = [
-    {
-        id: 1,
-        name: "Tanvir",
-        email: "ta@gmail.com",
-        type: "admin",
-        password: "123"
-    },
-    {
-        id: 2,
-        name: "Samiur",
-        email: "s@gmail.com",
-        type: "user",
-        password: "password"
-    },
-    {
-        id: 3,
-        name: "Mehedi",
-        email: "m@gmail.com",
-        type: "user",
-        password: "password"
-    },
-]
 
 export { handler as GET, handler as POST }

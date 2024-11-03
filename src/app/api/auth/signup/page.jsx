@@ -11,7 +11,8 @@ const page = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const newUser = { name, email, password }
+        const type = form.type.value;
+        const newUser = { name, email, password, type }
 
         const res = await fetch(`${url}/api/auth/signup/new-user`, {
             method: "POST",
@@ -35,6 +36,14 @@ const page = () => {
                     </div>
                     <div>
                         <input className='outline-none bg-gray-100 rounded-md p-2' type="password" name='password' placeholder='password' />
+                    </div>
+                    <div>
+                        <select name='type' className='outline-none bg-gray-100 rounded-md p-2'>
+                            <option disabled selected>Chose one?</option>
+                            <option>admin</option>
+                            <option>modaretor</option>
+                            <option>user</option>
+                        </select>
                     </div>
                     <button className='btn w-36'>Sign Up</button>
                 </div>
